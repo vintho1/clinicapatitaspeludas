@@ -1,5 +1,7 @@
 package co.edu.uniquindio.ingesis.patitaspeludas.clinicapatitaspeludas.model;
 
+import java.util.Objects;
+
 public class Mascota {
     private String nombre;
     private String edad;
@@ -73,5 +75,31 @@ public class Mascota {
 
     public void setHistorialClinico(HistorialClinico historialClinico) {
         this.historialClinico = historialClinico;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mascota mascota = (Mascota) o;
+        return Objects.equals(nombre, mascota.nombre) && Objects.equals(edad, mascota.edad) && Objects.equals(sexo, mascota.sexo) && Objects.equals(tipoEnum, mascota.tipoEnum) && Objects.equals(raza, mascota.raza) && Objects.equals(propietario, mascota.propietario) && Objects.equals(historialClinico, mascota.historialClinico);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre, edad, sexo, tipoEnum, raza, propietario, historialClinico);
+    }
+
+    @Override
+    public String toString() {
+        return "Mascota{" +
+                "nombre='" + nombre + '\'' +
+                ", edad='" + edad + '\'' +
+                ", sexo='" + sexo + '\'' +
+                ", tipoEnum=" + tipoEnum +
+                ", raza='" + raza + '\'' +
+                ", propietario=" + propietario +
+                ", historialClinico=" + historialClinico +
+                '}';
     }
 }

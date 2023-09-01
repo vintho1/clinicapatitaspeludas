@@ -1,5 +1,6 @@
 package co.edu.uniquindio.ingesis.patitaspeludas.clinicapatitaspeludas.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,15 @@ public class PatitasPeludas {
 
     public List<Cliente> clienteList = new ArrayList<>();
     public List<Mascota> mascotaList = new ArrayList<>();
+    public List<Factura> facturaList = new ArrayList<>();
+
+    public void generarFactura(Double costoAnadido, Cliente cliente, String observacion, String atencion){
+        facturaList.add(new Factura(costoAnadido, cliente, observacion, atencion));
+    }
+
+    public AtencionVeterinaria generarAtencionVeterinaria(Enum<Estado> estadoEnum, LocalDate localDate, Mascota mascota, Medico medico){
+        return new AtencionVeterinaria(estadoEnum, localDate, mascota, medico);
+    }
 
     public void registrarCliente(String nombre, String telefono, String correo, String cedula, String direccion){
         clienteList.add(new Cliente(nombre, telefono, correo, cedula, direccion));
@@ -22,19 +32,10 @@ public class PatitasPeludas {
         mascotaList.add(new Mascota(nombre, edad, sexo, tipo, raza, propietario, historialClinico));
     }
 
-    public HistorialClinico OHC(String cedulaDueno, String nombreMascota){
+    public HistorialClinico obtenerHistorialClinico(String cedulaDueno, String nombreMascota){
         List<Mascota> coincidencias = mascotaList
                 .stream()
                 .filter(mascota -> mascota.getNombre().equals(nombreMascota) && mascota.getPropietario().getCedula().equals(cedulaDueno)).toList();
         return coincidencias.get(0).getHistorialClinico();
-    }
-
-    public void getHistorialClinico(String cedulaDueno, String nombreMascota){
-        System.out.println("Motivo consulta: " + "\n\t" +
-                OHC(cedulaDueno, nombreMascota).getMotivoConsulta());
-        System.out.println("Enfermedades actuales: " + "\n\t" +
-                OHC(cedulaDueno, nombreMascota).getEnfermedadActual());
-        System.out.println("Antecedentes: " + "\n\t" +
-                OHC(cedulaDueno, nombreMascota).getAntecedentes());
     }
 }

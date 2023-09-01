@@ -1,6 +1,7 @@
 package co.edu.uniquindio.ingesis.patitaspeludas.clinicapatitaspeludas.model;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class AtencionVeterinaria {
     private Enum<Estado> estadoEnum;
@@ -45,5 +46,28 @@ public class AtencionVeterinaria {
 
     public void setMedico(Medico medico) {
         this.medico = medico;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AtencionVeterinaria that = (AtencionVeterinaria) o;
+        return Objects.equals(estadoEnum, that.estadoEnum) && Objects.equals(localDate, that.localDate) && Objects.equals(mascota, that.mascota) && Objects.equals(medico, that.medico);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(estadoEnum, localDate, mascota, medico);
+    }
+
+    @Override
+    public String toString() {
+        return "AtencionVeterinaria{" +
+                "estadoEnum=" + estadoEnum +
+                ", localDate=" + localDate +
+                ", mascota=" + mascota +
+                ", medico=" + medico +
+                '}';
     }
 }
